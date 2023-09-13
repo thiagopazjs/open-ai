@@ -1,8 +1,10 @@
-import { Github, FileVideo,Upload } from 'lucide-react'
+import { Github, FileVideo, Upload, Wand2 } from 'lucide-react'
 import { Button } from './components/ui/button'
 import { Separator } from './components/ui/separator'
 import { Textarea } from './components/ui/textarea'
 import { Label } from './components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './components/ui/select'
+import { Slider } from './components/ui/slider'
 
 
 export function App() {
@@ -67,17 +69,69 @@ export function App() {
 
             </div>
             <Button type='submit' className='w-full'>
-            Carregar Video 
-             <Upload className='w-4 h-4 ml-2'/>
+              Carregar Video
+              <Upload className='w-4 h-4 ml-2' />
             </Button>
           </form>
 
-          <Separator/>
+          <Separator />
 
-        <form className='space-y-6'>
+          <form className='space-y-6'>
 
-        <div className='space'></div>
-        </form>
+            <div className='space-y2'>
+              <Label>prompt</Label>
+              <Select  >
+                <SelectTrigger>
+                  <SelectValue placeholder='selecione um prompt...' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='title'>Título do Youtube</SelectItem>
+                  <SelectItem value='description'>Descrição do Youtube</SelectItem>
+                </SelectContent>
+              </Select>
+
+
+            </div>
+
+            <div className='space-y2'>
+              <Label>Modelo</Label>
+              <Select disabled defaultValue='gpt3.5'>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='gpt3.5'>GPT 3.5-turbo 16k</SelectItem>
+                </SelectContent>
+              </Select>
+              <span className='block text-xs text-muted-foreground italic'>
+                Você poderá customizar essa opção em breve
+              </span>
+
+            </div>
+
+            <Separator />
+
+            <div className='space-y-4'>
+              <Label>Temperatura</Label>
+              <Slider
+                min={0}
+                max={1}
+                step={0.1}
+
+              />
+              <span className='block text-xs text-muted-foreground italic leading-relaxed'>
+
+                Valores mais altos tendem a deixar o resultado mais criativo porem com possíveis erros
+              </span>
+
+            </div>
+
+            <Separator />
+            <Button type='submit' className='w-full'>
+              Executar
+              <Wand2 className='w-4 h-4 nl-2' />
+            </Button>
+          </form>
 
         </aside>
 

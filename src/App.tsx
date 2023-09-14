@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Slider } from "./components/ui/slider";
 import { useState } from "react";
 import { useCompletion } from "ai/react"
-
 import { VideoInputForm } from './components/ui/video-input-form';
 import { PromptSelect } from './components/ui/prompt-select';
 

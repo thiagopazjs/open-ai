@@ -1,7 +1,6 @@
 import { FileVideo, Upload } from "lucide-react";
-
+import { loadFFmpeg } from "@/lib/ffmpeg";
 import { ChangeEvent, FormEvent, useMemo, useRef, useState } from "react";
-
 import { fetchFile } from "@ffmpeg/util";
 import { api } from "@/lib/axios";
 import { Separator } from "./separator";
@@ -43,11 +42,13 @@ export function VideoInputForm(props: VideoInputFormProps) {
   async function convertVideoToAudio(video: File) {
     console.log('Convert started.')
 
-    const ffmpeg = await getFFmpeg()
+    const ffmpeg = await loadFFmpeg()
 
     await ffmpeg.writeFile('input.mp4', await fetchFile(video))
 
-     
+    // ffmpeg.on('log', log => {
+    //   console.log(log)
+    // })
 
     ffmpeg.on('progress', progress => {
       console.log('Convert progress: ' + Math.round(progress.progress * 100))
@@ -157,7 +158,7 @@ export function VideoInputForm(props: VideoInputFormProps) {
         type="submit"
         className="w-full data-[success=true]:bg-emerald-400"
       >
-        {status === 'waiting'? (
+        {status === 'waiting' ? (
           <>
             Carregar video
             <Upload className="w-4 h-4 ml-2" />
